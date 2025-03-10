@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Poster Child</title>
+  <link rel="icon" href="data:image/png;base64,iVBORw0KGgo=">
+  <style>
+    main {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 1rem;
+    }
+
+    #postForm {
+      display: grid;
+      grid-template-columns: 1fr 275px;
+    }
+
+    #title,
+    textarea {
+      width: calc(100% - 30px);
+    }
+
+    textarea {
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Poster Child</h1>
+  </header>
+
+  <main>
+    <menu id="contentFiles">
+      <li><a id="newPost" href="/">+ New Post</a></li>
+      <%- files %>
+    </menu>
+
+    <form id="postForm" method="post">
+      <input type="hidden" name="sha" value="<%= currentFile?.sha %>" />
+
+      <div>
+        <div class=" form-group">
+          <label for="title" class="sr-only">Title</label>
+          <input id="title" name="title" type="text" placeholder="Title goes here"
+            value="<%= currentFile?.frontmatter?.title %>">
+        </div>
+
+        <div class="form-group">
+          <textarea id="content" name="content"><%- currentFile?.content %></textarea>
+        </div>
+      </div>
+
+      <aside>
+        <div class="form-group">
+          <label for="draft">Draft</label>
+          <select id="draft" name="draft">
+            <option value="true" <%=currentFile?.frontmatter?.draft ? 'selected' : '' %>>True</option>
+            <option value="false" <%=!currentFile?.frontmatter?.draft ? 'selected' : '' %>>False</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <button type="button" class="button-secondary">Delete Post</button>
+          <button type="submit" class="button">Save Post</button>
+        </div>
+
+        <details>
+          <summary>Essentials</summary>
+          <fieldset>
+            <div class="form-group">
+              <label for="date">Date (e.g. 25-01-31)</label>
+              <input id="date" name="date" type="text" value="<%= currentFile?.frontmatter?.date %>">
+            </div>
+            <div class="form-group">
+              <label for="slug">Slug (e.g. 250131)</label>
+              <input id="slug" name="slug" type="text" value="<%= currentFile?.frontmatter?.slug %>">
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Taxonomy</legend>
+            <div class="form-group">
+              <label for="categories">Categories <abbr title="Comma separated">(?)</abbr></label>
+              <input id="categories" name="categories" type="text" value="<%= currentFile?.frontmatter?.categories %>">
+            </div>
+            <div class="form-group">
+              <label for="tags">Tags <abbr title="Comma separated">(?)</abbr></label>
+              <input id="tags" name="tags" type="text" value="<%= currentFile?.frontmatter?.tags %>">
+            </div>
+          </fieldset>
+        </details>
+
+        <details>
+          <summary>Meta</summary>
+          <fieldset>
+            <div class="form-group">
+              <label for="keywords">Keywords <abbr title="Comma separated">(?)</abbr></label>
+              <input id="keywords" name="keywords" type="text" value="<%= currentFile?.frontmatter?.keywords %>">
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input id="description" name="description" type="text"
+                value="<%= currentFile?.frontmatter?.description %>" />
+            </div>
+          </fieldset>
+        </details>
+      </aside>
+    </form>
+  </main>
+
+</body>
+
+</html>
