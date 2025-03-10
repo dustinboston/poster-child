@@ -1,5 +1,7 @@
 # Poster Child: A Simple, Git-Backed CMS
 
+![Screenshot 2025-03-10 071158](https://github.com/user-attachments/assets/5679c7e6-f1dc-4aa4-8b65-c6ed9b7e42f4)
+
 > Poster Child is a single page "content management system" (CMS) built with Node.js, Express, and Octokit, designed for users who want to manage their content directly within a Git repository. It provides a straightforward interface for creating, editing, and managing markdown posts, along with associated metadata.
 
 ## Features
